@@ -1,15 +1,19 @@
+from random import randrange
+
+computer_guess = randrange(1, 100)
+
+
 def number_guess(number):
-    from random import randrange
-    computer_guess = randrange(1, 100)
     if number == computer_guess:
         result = 'You guessed it!'
     elif number < computer_guess:
-        result = 'Too low!\nTry again!'
-        if computer_guess - number < 10:
-            result += '\n'
+        result = 'Too low!\nTry again!\n'
+        if abs(computer_guess - number) < 10:
+            result += 'You are getting closer!'
     else:
-        result = 'Too high!\nTry again!'
-
+        result = 'Too high!\nTry again!\n'
+        if abs(computer_guess - number) < 10:
+            result += 'You are getting closer!'
     return result
 
 
@@ -17,10 +21,11 @@ command = input('Welcome to guess the number! press "enter" to continue or press
 if command == 'q':
     raise SystemExit('Thanks for playing!')
 
+
 elif command == '':
     while True:
         player_guess = int(input('Enter the number between 1 and 100: '))
-        if number_guess(player_guess) == 'You guessed it':
+        if player_guess == computer_guess:
             print(number_guess(player_guess))
             break
         else:
